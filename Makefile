@@ -5,11 +5,18 @@ OBJCOPY = arm-none-eabi-objcopy
 SIZE = arm-none-eabi-size
 
 CFLAGS = -mcpu=cortex-m3 -mthumb -Os -Wall -nostdlib -nostartfiles
-CFLAGS += -I./Core
+FREERTOS_SRC = \
+  FreeRTOS/Source/tasks.c \
+  FreeRTOS/Source/queue.c \
+  FreeRTOS/Source/list.c \
+  FreeRTOS/portable/GCC/ARM_CM3/port.c
+
+CFLAGS += -I./FreeRTOS/include -I./include -I./FreeRTOS/portable/GCC/ARM_CM3
+
+SRC = Core/main.c Core/startup_stm32f103x6.s $(FREERTOS_SRC)
 
 LDFLAGS = -T stm32f103c6tx.ld -nostartfiles -Wl,--gc-sections
 
-SRC = core/main.c core/startup_stm32f103x6.s
 OBJ = $(SRC:.c=.o)
 
 BUILD_DIR = build
