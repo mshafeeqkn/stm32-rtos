@@ -7,7 +7,8 @@ SIZE = arm-none-eabi-size
 CFLAGS = -mcpu=cortex-m3 -mthumb -Os -Wall -nostdlib -nostartfiles
 CFLAGS += -I./FreeRTOS/include -I./include -I./FreeRTOS/portable/GCC/ARM_CM3
 
-FREERTOS_SRC = \
+FREERTOS_SRC = 
+# \
   FreeRTOS/Source/tasks.c \
   FreeRTOS/Source/queue.c \
   FreeRTOS/Source/list.c \

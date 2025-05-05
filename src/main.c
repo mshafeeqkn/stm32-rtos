@@ -2,20 +2,17 @@
 #include "task.h"
 #include "stm32f103_defs.h"
 
-#define RCC_APB2ENR   (*(volatile uint32_t*)0x40021018)
-#define GPIOC_CRH     (*(volatile uint32_t*)0x40011004)
-#define GPIOC_ODR     (*(volatile uint32_t*)0x4001100C)
-
 void led_init(void) {
-    RCC_APB2ENR |= (1 << 4);              // Enable GPIOC
-    GPIOC_CRH &= ~(0xF << 20);            // Clear MODE13, CNF13
-    GPIOC_CRH |=  (0x2 << 20);            // Output mode 2 MHz
+    RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;                     // Enable GPIOC
+    GPIOC->CRH &= ~(GPIO_CRH_MODE13 | GPIO_CRH_CNF13);      // Clear MODE13, CNF13
+    GPIOC->CRH |=  GPIO_CRH_MODE13_1;                       // Output mode 2 MHz
 }
 
 void led_toggle(void) {
-    GPIOC_ODR ^= (1 << 13);
+    GPIOC->ODR ^= GPIO_ODR_ODR13;
 }
 
+#if 0
 void led_task(void *param) {
     (void)param;
     while (1) {
@@ -23,11 +20,22 @@ void led_task(void *param) {
         vTaskDelay(pdMS_TO_TICKS(500));
     }
 }
+#endif
+
+void delay(volatile uint32_t count) {
+    while (count--);
+}
 
 int main(void) {
     led_init();
-    xTaskCreate(led_task, "LED", 128, NULL, 1, NULL);
-    vTaskStartScheduler();
+
+    while(1) {
+        led_toggle();
+        delay(150000);
+    }
+
+    // xTaskCreate(led_task, "LED", 128, NULL, 1, NULL);
+    // vTaskStartScheduler();
     while (1);  // Should never reach here
 }
 
