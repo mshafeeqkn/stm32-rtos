@@ -9,7 +9,8 @@ FREERTOS_SRC = \
   FreeRTOS/Source/tasks.c \
   FreeRTOS/Source/queue.c \
   FreeRTOS/Source/list.c \
-  FreeRTOS/portable/GCC/ARM_CM3/port.c
+  FreeRTOS/portable/GCC/ARM_CM3/port.c \
+  FreeRTOS/portable/mem_mgmt/heap_4.c
 
 CFLAGS += -I./FreeRTOS/include -I./include -I./FreeRTOS/portable/GCC/ARM_CM3
 
@@ -28,8 +29,8 @@ all: $(BUILD_DIR) $(BIN)
 $(BUILD_DIR):
 	mkdir -p $@
 
-$(ELF): $(SRC)
-	$(CC) $(CFLAGS) $(SRC) $(LDFLAGS) -o $@
+$(ELF): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $@
 
 $(BIN): $(ELF)
 	$(OBJCOPY) -O binary $< $@

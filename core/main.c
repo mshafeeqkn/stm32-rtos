@@ -25,7 +25,7 @@ void led_task(void *param) {
 
 int main(void) {
     led_init();
-    xTaskCreate(led_task, "LED", 128, NULL, 1, NULL);
+    xTaskCreate(led_task, "LED", 32, NULL, 1, NULL);
     vTaskStartScheduler();
     while (1);  // Should never reach here
 }
