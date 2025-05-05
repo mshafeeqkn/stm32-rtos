@@ -1,5 +1,6 @@
 #include "FreeRTOS.h"
 #include "task.h"
+#include "stm32f103_defs.h"
 
 #define RCC_APB2ENR   (*(volatile uint32_t*)0x40021018)
 #define GPIOC_CRH     (*(volatile uint32_t*)0x40011004)

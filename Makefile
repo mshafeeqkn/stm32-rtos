@@ -14,7 +14,7 @@ FREERTOS_SRC = \
   FreeRTOS/portable/GCC/ARM_CM3/port.c \
   FreeRTOS/portable/mem_mgmt/heap_4.c
 
-SRC = Core/main.c Core/startup_stm32f103x6.s $(FREERTOS_SRC)
+SRC = src/main.c src/startup_stm32f103x6.s $(FREERTOS_SRC)
 BUILD_DIR = build
 
 SRC_C = $(filter %.c,$(SRC))
