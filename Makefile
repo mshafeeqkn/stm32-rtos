@@ -5,22 +5,22 @@ OBJCOPY = arm-none-eabi-objcopy
 SIZE = arm-none-eabi-size
 
 CFLAGS = -mcpu=cortex-m3 -mthumb -Os -Wall -nostdlib -nostartfiles -DSTM32F103x6
-CFLAGS += -I./FreeRTOS/Source/include -I./core/include -I./FreeRTOS/Source/portable/GCC/ARM_CM3
+CFLAGS += -I./FreeRTOS/Source/include -I./Core/Inc -I./FreeRTOS/Source/portable/GCC/ARM_CM3
 
 FREERTOS_SRC = \
   FreeRTOS/Source/tasks.c \
   FreeRTOS/Source/queue.c \
   FreeRTOS/Source/list.c \
   FreeRTOS/Source/portable/GCC/ARM_CM3/port.c \
-  FreeRTOS/Source/portable/mem_mgmt/heap_4.c
+  FreeRTOS/Source/portable/MemMang/heap_4.c
 # FREERTOS_SRC =
 
-SRC = core/src/main.c \
-core/src/freertos.c \
-core/src/stm32f1xx_it.c \
-core/src/system_stm32f1xx.c \
-core/src/sysmem.c \
-core/src/syscalls.c \
+SRC = Core/Src/main.c \
+Core/Src/freertos.c \
+Core/Src/stm32f1xx_it.c \
+Core/Src/system_stm32f1xx.c \
+Core/Src/sysmem.c \
+Core/Src/syscalls.c \
 startup_stm32f103x6.s \
 $(FREERTOS_SRC)
 
