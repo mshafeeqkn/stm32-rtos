@@ -5,7 +5,7 @@ OBJCOPY = arm-none-eabi-objcopy
 SIZE = arm-none-eabi-size
 
 CFLAGS = -mcpu=cortex-m3 -mthumb -Os -Wall -nostdlib -nostartfiles
-CFLAGS += -I./FreeRTOS/include -I./include -I./FreeRTOS/portable/GCC/ARM_CM3
+CFLAGS += -I./FreeRTOS/include -I./core/include -I./FreeRTOS/portable/GCC/ARM_CM3
 
 FREERTOS_SRC = \
   FreeRTOS/Source/tasks.c \
@@ -15,7 +15,11 @@ FREERTOS_SRC = \
   FreeRTOS/portable/mem_mgmt/heap_4.c
 # FREERTOS_SRC =
 
-SRC = src/main.c src/freertos.c src/startup_stm32f103x6.s $(FREERTOS_SRC)
+SRC = core/src/main.c \
+core/src/freertos.c \
+startup_stm32f103x6.s \
+$(FREERTOS_SRC)
+
 BUILD_DIR = build
 
 SRC_C = $(filter %.c,$(SRC))
