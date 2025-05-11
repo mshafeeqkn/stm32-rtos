@@ -8,7 +8,6 @@ SIZE = arm-none-eabi-size
 C_SRC = \
     Core/Src/main.c \
     Core/Src/freertos.c \
-    Core/Src/stm32f1xx_it.c \
     Core/Src/system_stm32f1xx.c \
     Core/Src/sysmem.c \
     Core/Src/syscalls.c \
