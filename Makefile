@@ -56,6 +56,6 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 flash: $(BIN)
-	st-flash write $(BIN) 0x8000000
+	st-flash --reset write $(BIN) 0x8000000
 
 .PHONY: all clean flash
