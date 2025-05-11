@@ -6,16 +6,16 @@ SIZE = arm-none-eabi-size
 
 
 C_SRC = \
-    Core/Src/main.c \
-    Core/Src/freertos.c \
-    Core/Src/system_stm32f1xx.c \
-    Core/Src/sysmem.c \
-    Core/Src/syscalls.c \
-    FreeRTOS/Source/tasks.c \
-    FreeRTOS/Source/queue.c \
-    FreeRTOS/Source/list.c \
-    FreeRTOS/Source/portable/GCC/ARM_CM3/port.c \
-    FreeRTOS/Source/portable/MemMang/heap_4.c
+    core/src/main.c \
+    core/src/freertos.c \
+    core/src/system_stm32f1xx.c \
+    core/src/sysmem.c \
+    core/src/syscalls.c \
+    free_rtos/src/tasks.c \
+    free_rtos/src/queue.c \
+    free_rtos/src/list.c \
+    free_rtos/src/portable/GCC/ARM_CM3/port.c \
+    free_rtos/src/portable/mem_mang/heap_4.c
 
 A_SRC = startup_stm32f103x6.s
 
@@ -28,7 +28,7 @@ BUILD_DIR = build
 
 COM_FLAGS = -mcpu=cortex-m3 -mthumb
 OPTS = -Og -Wall
-C_INC = -IFreeRTOS/Source/include -ICore/Inc -IFreeRTOS/Source/portable/GCC/ARM_CM3
+C_INC = -Icore/include -Ifree_rtos/src/include -Ifree_rtos/src/portable/GCC/ARM_CM3
 CFLAGS = $(COM_FLAGS) -DSTM32F103x6 $(C_INC) $(OPTS) -MMD -MP -MF"$(@:%.o=%.d)"  -fdata-sections -ffunction-sections
 LDFLAGS = $(COM_FLAGS) -Tstm32f103c6tx.ld -specs=nano.specs -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
 
