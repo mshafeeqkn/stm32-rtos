@@ -1,7 +1,6 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "main.h"
-#include <stddef.h>
 
 void led_init(void) {
     RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;                     // Enable GPIOC
