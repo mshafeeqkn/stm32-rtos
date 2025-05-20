@@ -1,34 +1,7 @@
-/**
-  *************** (C) COPYRIGHT 2017 STMicroelectronics ************************
-  * @file      startup_stm32f103x6.s
-  * @author    MCD Application Team
-  * @brief     STM32F103x6 Devices vector table for Atollic toolchain.
-  *            This module performs:
-  *                - Set the initial SP
-  *                - Set the initial PC == Reset_Handler,
-  *                - Set the vector table entries with the exceptions ISR address
-  *                - Configure the clock system   
-  *                - Branches to main in the C library (which eventually
-  *                  calls main()).
-  *            After Reset the Cortex-M3 processor is in Thread mode,
-  *            priority is Privileged, and the Stack is set to Main.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2017-2021 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
-
-  .syntax unified
-  .cpu cortex-m3
-  .fpu softvfp
-  .thumb
+.syntax unified
+.cpu cortex-m3
+.fpu softvfp
+.thumb
 
 .global g_pfnVectors
 .global Default_Handler
@@ -55,13 +28,13 @@ defined in linker script */
  * @retval : None
 */
 
-  .section .text.Reset_Handler
-  .weak Reset_Handler
-  .type Reset_Handler, %function
-Reset_Handler:
+.section .text.Reset_Handler
+.weak Reset_Handler
+.type Reset_Handler, %function
 
+Reset_Handler:
 /* Call the clock system initialization function.*/
-    bl  SystemInit
+  bl  SystemInit
 
 /* Copy the data segment initializers from flash to SRAM */
   ldr r0, =_sdata
@@ -109,7 +82,7 @@ LoopFillZerobss:
  * @param  None
  * @retval : None
 */
-    .section .text.Default_Handler,"ax",%progbits
+.section .text.Default_Handler,"ax",%progbits
 Default_Handler:
 Infinite_Loop:
   b Infinite_Loop
@@ -121,13 +94,12 @@ Infinite_Loop:
 * 0x0000.0000.
 *
 ******************************************************************************/
-  .section .isr_vector,"a",%progbits
-  .type g_pfnVectors, %object
-  .size g_pfnVectors, .-g_pfnVectors
+.section .isr_vector,"a",%progbits
+.type g_pfnVectors, %object
+.size g_pfnVectors, .-g_pfnVectors
 
 
 g_pfnVectors:
-
   .word _estack
   .word Reset_Handler
   .word NMI_Handler
